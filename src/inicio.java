@@ -52,6 +52,13 @@ public class inicio {
             adminButton.addActionListener(listener);
             cajeroButton.addActionListener(listener);
             bodegaButton.addActionListener(listener);
+        button8.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null, "¡Muchas gracias por su visita!", "Gracias por Preferirnos", JOptionPane.INFORMATION_MESSAGE);
+                System.exit(0);
+            }
+        });
     }
 }
 

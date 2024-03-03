@@ -5,9 +5,13 @@ import java.awt.event.ActionListener;
 
 public class login {
     JPanel loginJPanel;
+
     private JButton button1;
     private JTextField textField1;
     private JPasswordField passwordField1;
+    private JButton SALIRButton;
+    private JPanel login1;
+    private JPanel login2;
 
     public login(String tipoUsuario) {
         button1.addActionListener(new ActionListener() {
@@ -66,6 +70,13 @@ public class login {
                         ex.printStackTrace();
                     }
                 }
+            }
+        });
+        SALIRButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null, "¡Muchas gracias por su visita!", "Gracias por Preferirnos", JOptionPane.INFORMATION_MESSAGE);
+                System.exit(0);
             }
         });
     }

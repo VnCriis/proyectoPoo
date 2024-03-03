@@ -40,10 +40,7 @@ public class inicio {
                 }
 
                 if (tipoUsuario != null) {
-                    // Crear una instancia de login para el tipo de usuario seleccionado
                     login loginInstance = new login(tipoUsuario);
-
-                    // Establecer el panel de contenido de la ventana principal
                     Main.ventana.setContentPane(loginInstance.loginJPanel);
                     Main.ventana.revalidate();
                 }

@@ -25,5 +25,12 @@ public class admin {
                 button2.setText(horaFormateada);
             }
         });
+        adminButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Main.ventana.setContentPane(new empleado().empleadoJPanel);
+                Main.ventana.revalidate();
+            }
+        });
     }
 }

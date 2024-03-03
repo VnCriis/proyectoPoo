@@ -35,11 +35,11 @@ public class empleado {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (e.getSource() == button1) {
-                    agregarEmpleado();
+                    eliminarEmpleado();
                 } else if (e.getSource() == button2) {
                     editarEmpleado();
                 } else if (e.getSource() == button3) {
-                    eliminarEmpleado();
+                    agregarEmpleado();
                 }
             }
         };

@@ -115,7 +115,7 @@
               <background color="-16610664"/>
               <font name="Bodoni MT" size="12"/>
               <foreground color="-394241"/>
-              <text value="SALIR"/>
+              <text value="REGRESAR"/>
             </properties>
           </component>
           <hspacer id="9fb6e">

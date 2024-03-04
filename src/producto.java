@@ -1,4 +1,8 @@
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,11 +20,12 @@ public class producto {
     private JComboBox comboBox3;
     private JButton buscarButton;
     private JTextField textField6;
-    private JTextField textField2;
-    private JTextField textField3;
-    private JTextField textField4;
-    private JTextField textField5;
-    private JTextField textField7;
+        private JTextField textField0;
+        private JTextField textField1;
+        private JTextField textField2;
+        private JTextField textField3;
+        private JTextField textField4;
+        private JTextField textField5;
     private Connection connection;
     private JLabel advertencia;
 
@@ -293,7 +298,6 @@ public class producto {
             }
         });
     }
-
     private void configureTable() {
         if (connection != null) {
             try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM productos");
@@ -320,6 +324,71 @@ public class producto {
             }
         } else {
             System.out.println("La conexión a la base de datos es nula.");
+        }
+    }
+    private void configureListeners() {
+        table1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()) {
+                    int selectedRow = table1.getSelectedRow();
+                    if (selectedRow != -1 && selectedRow < table1.getRowCount()) {
+                        textField0.setText(table1.getValueAt(selectedRow, 0).toString());
+                        textField1.setText(table1.getValueAt(selectedRow, 1).toString());
+                        textField2.setText(table1.getValueAt(selectedRow, 2).toString());
+                        textField3.setText(table1.getValueAt(selectedRow, 3).toString());
+                        textField4.setText(table1.getValueAt(selectedRow, 4).toString());
+                        textField5.setText(table1.getValueAt(selectedRow, 5).toString());
+                    }
+                }
+            }
+        });
+        textField6.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                searchEmployee();
+            }
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                searchEmployee();
+            }
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                searchEmployee();
+            }
+        });
+    }
+    private void searchEmployee() {
+        String searchText = textField6.getText().trim();
+        if (!searchText.isEmpty()) {
+            try {
+                PreparedStatement statement = connection.prepareStatement("SELECT * FROM productos WHERE id_producto LIKE ?");
+                statement.setString(1, "%" + searchText + "%");
+                ResultSet resultSet = statement.executeQuery();
+                DefaultTableModel searchModel = new DefaultTableModel();
+                searchModel.addColumn("id_producto");
+                searchModel.addColumn("categoria");
+                searchModel.addColumn("marca");
+                searchModel.addColumn("nombre");
+                searchModel.addColumn("cantidad");
+                searchModel.addColumn("precio");
+                while (resultSet.next()) {
+                    int id_producto = resultSet.getInt("id_producto");
+                    String categoria = resultSet.getString("categoria");
+                    String marca = resultSet.getString("marca");
+                    String nombre = resultSet.getString("nombre");
+                    int cantidad = resultSet.getInt("cantidad");
+                    double precio = resultSet.getDouble("precio");
+                    searchModel.addRow(new Object[]{id_producto,categoria,marca,nombre,cantidad,precio});
+                }
+                table1.setModel(searchModel);
+                resultSet.close();
+                statement.close();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        } else {
+            configureTable();
         }
     }
 }

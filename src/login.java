@@ -13,6 +13,9 @@ public class login {
     private JPanel login1;
     private JPanel login2;
 
+    public login() {
+    }
+
     public login(String tipoUsuario) {
         button1.addActionListener(new ActionListener() {
             @Override
@@ -51,7 +54,7 @@ public class login {
                                 Main.ventana.revalidate();
                                 break;
                             case "bodeguero":
-                                Main.ventana.setContentPane(new admin().adminJPanel);
+                                Main.ventana.setContentPane(new producto().productoJPanel);
                                 Main.ventana.revalidate();
                                 break;
                         }
@@ -79,5 +82,6 @@ public class login {
                 System.exit(0);
             }
         });
+
     }
 }

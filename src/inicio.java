@@ -6,10 +6,10 @@ import java.time.format.DateTimeFormatter;
 
 public class inicio {
     JPanel inicioJPanel;
-    private JButton button1;
+    private JButton CObutton1;
     private JButton button2;
-    private JButton button3;
-    private JButton button4;
+    private JButton SOIniciobutton3;
+    private JButton AYbutton4;
     private JButton adminButton;
     private JButton cajeroButton;
     private JButton bodegaButton;
@@ -54,6 +54,24 @@ public class inicio {
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(null, "¡Muchas gracias por su visita!", "Gracias por Preferirnos", JOptionPane.INFORMATION_MESSAGE);
                 System.exit(0);
+            }
+        });
+        SOIniciobutton3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(null, "Para mas asesoria sobre el diseño del codigo llama al +59398765421 o al correo jzaldumbide@epn.education.ec", "Soporte", JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+        CObutton1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        AYbutton4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
             }
         });
     }

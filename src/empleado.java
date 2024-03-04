@@ -25,6 +25,7 @@ public class empleado {
     private JButton button1;
     private JButton button2;
     private JButton button3;
+    private JButton regresarButton;
     private Connection connection;
 
     public empleado() {
@@ -46,6 +47,13 @@ public class empleado {
         button1.addActionListener(listener);
         button2.addActionListener(listener);
         button3.addActionListener(listener);
+        regresarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Main.ventana.setContentPane(new admin().adminJPanel);
+                Main.ventana.revalidate();
+            }
+        });
     }
     private void configureTable() {
         if (connection != null) {

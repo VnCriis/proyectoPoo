@@ -47,7 +47,7 @@ public class login {
                                 Main.ventana.revalidate();
                                 break;
                             case "cajero":
-                                Main.ventana.setContentPane(new Cajero().cajerop);
+                                Main.ventana.setContentPane(new admin().adminJPanel);
                                 Main.ventana.revalidate();
                                 break;
                             case "bodeguero":

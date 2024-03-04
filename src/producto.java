@@ -1,5 +1,7 @@
 import javax.swing.*;
 
 public class producto {
-    public JPanel productoJPanel;
+    JPanel productoJPanel;
+    private JTable table1;
+    private JButton regresarButton;
 }

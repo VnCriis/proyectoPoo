@@ -47,11 +47,11 @@ public class login {
                                 Main.ventana.revalidate();
                                 break;
                             case "cajero":
-                                Main.ventana.setContentPane(new admin().adminJPanel);
+                                Main.ventana.setContentPane(new FacturasAD().facturasADm);
                                 Main.ventana.revalidate();
                                 break;
                             case "bodeguero":
-                                Main.ventana.setContentPane(new admin().adminJPanel);
+                                Main.ventana.setContentPane(new producto().productoJPanel);
                                 Main.ventana.revalidate();
                                 break;
                         }
@@ -79,5 +79,8 @@ public class login {
                 System.exit(0);
             }
         });
+    }
+
+    public login() {
     }
 }

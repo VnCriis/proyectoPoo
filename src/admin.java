@@ -7,13 +7,14 @@ import java.time.format.DateTimeFormatter;
 public class admin {
     JPanel adminJPanel;
     private JButton adminButton;
-    private JButton cajeroButton;
+    private JButton facturaButton;
     private JButton bodegaButton;
     private JButton button8;
     private JButton button1;
     private JButton button2;
     private JButton button3;
     private JButton button4;
+    private JButton empleadoButton;
 
     public admin() {
         button2.addActionListener(new ActionListener() {
@@ -25,24 +26,31 @@ public class admin {
                 button2.setText(horaFormateada);
             }
         });
-        adminButton.addActionListener(new ActionListener() {
+        empleadoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Main.ventana.setContentPane(new empleado().empleadoJPanel);
                 Main.ventana.revalidate();
             }
         });
-        cajeroButton.addActionListener(new ActionListener() {
+        bodegaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Main.ventana.setContentPane(new ProductosAdmin().productosJPanel);
                 Main.ventana.revalidate();
             }
         });
-        bodegaButton.addActionListener(new ActionListener() {
+        facturaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 Main.ventana.setContentPane(new FacturasAD().facturasADm);
+                Main.ventana.revalidate();
+            }
+        });
+        button8.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Main.ventana.setContentPane(new login().loginJPanel);
                 Main.ventana.revalidate();
             }
         });

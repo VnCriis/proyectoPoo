@@ -2,7 +2,7 @@ import java.sql.*;
 public class conector {
     static final String URL = "jdbc:mysql://127.0.0.1:3306/minimarket";
     static final String USER= "root";
-    static final String PASSWORD= "Cris0112*";
+    static final String PASSWORD= "12345";
     public static Connection obtenerConexion() {
         Connection conexion = null;
         try {

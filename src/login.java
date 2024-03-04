@@ -75,8 +75,13 @@ public class login {
         SALIRButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "¡Muchas gracias por su visita!", "Gracias por Preferirnos", JOptionPane.INFORMATION_MESSAGE);
-                System.exit(0);
+                JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(SALIRButton);
+                frame.dispose();
+                Main.ventana.setContentPane(new inicio().inicioJPanel);
+                Main.ventana.revalidate();
+                Main.ventana.setSize(1800,870);
+                Main.ventana.setLocationRelativeTo(null);
+                Main.ventana.setVisible(true);
             }
         });
     }

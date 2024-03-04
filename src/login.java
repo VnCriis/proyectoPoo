@@ -47,11 +47,11 @@ public class login {
                                 Main.ventana.revalidate();
                                 break;
                             case "cajero":
-                                Main.ventana.setContentPane(new FacturasAD().facturasADm);
+                                Main.ventana.setContentPane(new Cajero().cajerop);
                                 Main.ventana.revalidate();
                                 break;
                             case "bodeguero":
-                                Main.ventana.setContentPane(new producto().productoJPanel);
+                                Main.ventana.setContentPane(new admin().adminJPanel);
                                 Main.ventana.revalidate();
                                 break;
                         }
@@ -75,17 +75,9 @@ public class login {
         SALIRButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(SALIRButton);
-                frame.dispose();
-                Main.ventana.setContentPane(new inicio().inicioJPanel);
-                Main.ventana.revalidate();
-                Main.ventana.setSize(1800,870);
-                Main.ventana.setLocationRelativeTo(null);
-                Main.ventana.setVisible(true);
+                JOptionPane.showMessageDialog(null, "¡Muchas gracias por su visita!", "Gracias por Preferirnos", JOptionPane.INFORMATION_MESSAGE);
+                System.exit(0);
             }
         });
-    }
-
-    public login() {
     }
 }

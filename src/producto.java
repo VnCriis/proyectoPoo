@@ -12,7 +12,6 @@ import java.util.Set;
 
 public class producto {
     JPanel productoJPanel;
-    private JTable table1;
     private JButton regresarButton;
     private JButton button1;
     private JComboBox comboBox1;
@@ -20,12 +19,16 @@ public class producto {
     private JComboBox comboBox3;
     private JButton buscarButton;
     private JTextField textField6;
-        private JTextField textField0;
-        private JTextField textField1;
-        private JTextField textField2;
-        private JTextField textField3;
-        private JTextField textField4;
-        private JTextField textField5;
+    private JTable table1;
+    private JTextField textField0;
+    private JTextField textField1;
+    private JTextField textField2;
+    private JTextField textField3;
+    private JTextField textField4;
+    private JTextField textField5;
+    private JButton eliminarButton;
+    private JButton actualizarButton;
+    private JButton agregarButton;
     private Connection connection;
     private JLabel advertencia;
 
@@ -297,6 +300,141 @@ public class producto {
                 }
             }
         });
+        regresarButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Main.ventana.setContentPane(new login().loginJPanel);
+                Main.ventana.revalidate();
+            }
+        });
+        table1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()) {
+                    int selectedRow = table1.getSelectedRow();
+                    if (selectedRow != -1) {
+                        verDatos(selectedRow);
+                    }
+                }
+            }
+        });
+        ActionListener listener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (e.getSource() == eliminarButton) {
+                    eliminarProducto();
+                    JOptionPane.showMessageDialog(null, "PRODUCTO ELIMINADO");
+                } else if (e.getSource() == actualizarButton) {
+                    editarProducto();
+                    JOptionPane.showMessageDialog(null, "PRODUCTO ACTUALIZADO");
+                } else if (e.getSource() == agregarButton) {
+                    agregarProducto();
+                    JOptionPane.showMessageDialog(null, "PRODUCTO INGRESADO");
+                }
+            }
+        };
+        eliminarButton.addActionListener(listener);
+        actualizarButton.addActionListener(listener);
+        agregarButton.addActionListener(listener);
+    }
+    private void agregarProducto() {
+        textField0.setEditable(false);
+        try {
+            int idProducto = Integer.parseInt(textField0.getText());
+            String categoria = textField1.getText();
+            String marca = textField2.getText();
+            String nombre = textField3.getText();
+            int cantidad = Integer.parseInt(textField4.getText());
+            double precio = Double.parseDouble(textField5.getText());
+            String query = "INSERT INTO productos (id_producto, categoria, marca, nombre, cantidad, precio) " + "VALUES (?, ?, ?, ?, ?, ?)";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, idProducto);
+            statement.setString(2, categoria);
+            statement.setString(3, marca);
+            statement.setString(4, nombre);
+            statement.setInt(5, cantidad);
+            statement.setDouble(6, precio);
+            statement.executeUpdate();
+            configureTable();
+            textField0.setText("");
+            textField1.setText("");
+            textField2.setText("");
+            textField3.setText("");
+            textField4.setText("");
+            textField5.setText("");
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private void editarProducto() {
+        textField0.setEditable(false);
+        try {
+            int selectedRow = table1.getSelectedRow();
+            if (selectedRow == -1) {
+                JOptionPane.showMessageDialog(null, "Por favor, seleccione un producto para editar.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            int idProducto = Integer.parseInt(textField0.getText());
+            String categoria = textField1.getText();
+            String marca = textField2.getText();
+            String nombre = textField3.getText();
+            int cantidad = Integer.parseInt(textField4.getText());
+            double precio = Double.parseDouble(textField5.getText());
+
+            String query = "UPDATE productos SET categoria=?, marca=?, nombre=?, cantidad=?, precio=? WHERE id_producto=?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setString(1, categoria);
+            statement.setString(2, marca);
+            statement.setString(3, nombre);
+            statement.setInt(4, cantidad);
+            statement.setDouble(5, precio);
+            statement.setInt(6, idProducto);
+            statement.executeUpdate();
+            configureTable();
+            textField0.setText("");
+            textField1.setText("");
+            textField2.setText("");
+            textField3.setText("");
+            textField4.setText("");
+            textField5.setText("");
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+
+    private void eliminarProducto() {
+        try {
+            int selectedRow = table1.getSelectedRow();
+            if (selectedRow == -1) {
+                JOptionPane.showMessageDialog(null, "Por favor, seleccione un producto para eliminar.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            int idProducto = Integer.parseInt(table1.getValueAt(selectedRow, 0).toString());
+            String query = "DELETE FROM productos WHERE id_producto=?";
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setInt(1, idProducto);
+            statement.executeUpdate();
+            configureTable();
+            textField0.setText("");
+            textField1.setText("");
+            textField2.setText("");
+            textField3.setText("");
+            textField4.setText("");
+            textField5.setText("");
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    private void verDatos(int filaSeleccionada){
+        textField0.setEditable(false);
+        textField0.setText(table1.getValueAt(filaSeleccionada, 0).toString());
+        textField1.setText(table1.getValueAt(filaSeleccionada, 1).toString());
+        textField2.setText(table1.getValueAt(filaSeleccionada, 2).toString());
+        textField3.setText(table1.getValueAt(filaSeleccionada, 3).toString());
+        textField4.setText(table1.getValueAt(filaSeleccionada, 4).toString());
+        textField5.setText(table1.getValueAt(filaSeleccionada, 5).toString());
     }
     private void configureTable() {
         if (connection != null) {
@@ -324,71 +462,6 @@ public class producto {
             }
         } else {
             System.out.println("La conexión a la base de datos es nula.");
-        }
-    }
-    private void configureListeners() {
-        table1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent e) {
-                if (!e.getValueIsAdjusting()) {
-                    int selectedRow = table1.getSelectedRow();
-                    if (selectedRow != -1 && selectedRow < table1.getRowCount()) {
-                        textField0.setText(table1.getValueAt(selectedRow, 0).toString());
-                        textField1.setText(table1.getValueAt(selectedRow, 1).toString());
-                        textField2.setText(table1.getValueAt(selectedRow, 2).toString());
-                        textField3.setText(table1.getValueAt(selectedRow, 3).toString());
-                        textField4.setText(table1.getValueAt(selectedRow, 4).toString());
-                        textField5.setText(table1.getValueAt(selectedRow, 5).toString());
-                    }
-                }
-            }
-        });
-        textField6.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                searchEmployee();
-            }
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                searchEmployee();
-            }
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                searchEmployee();
-            }
-        });
-    }
-    private void searchEmployee() {
-        String searchText = textField6.getText().trim();
-        if (!searchText.isEmpty()) {
-            try {
-                PreparedStatement statement = connection.prepareStatement("SELECT * FROM productos WHERE id_producto LIKE ?");
-                statement.setString(1, "%" + searchText + "%");
-                ResultSet resultSet = statement.executeQuery();
-                DefaultTableModel searchModel = new DefaultTableModel();
-                searchModel.addColumn("id_producto");
-                searchModel.addColumn("categoria");
-                searchModel.addColumn("marca");
-                searchModel.addColumn("nombre");
-                searchModel.addColumn("cantidad");
-                searchModel.addColumn("precio");
-                while (resultSet.next()) {
-                    int id_producto = resultSet.getInt("id_producto");
-                    String categoria = resultSet.getString("categoria");
-                    String marca = resultSet.getString("marca");
-                    String nombre = resultSet.getString("nombre");
-                    int cantidad = resultSet.getInt("cantidad");
-                    double precio = resultSet.getDouble("precio");
-                    searchModel.addRow(new Object[]{id_producto,categoria,marca,nombre,cantidad,precio});
-                }
-                table1.setModel(searchModel);
-                resultSet.close();
-                statement.close();
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
-        } else {
-            configureTable();
         }
     }
 }

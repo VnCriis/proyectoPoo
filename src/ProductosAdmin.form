@@ -270,7 +270,7 @@
                 <properties>
                   <font name="Elephant" size="18"/>
                   <foreground color="-16777216"/>
-                  <text value="Actulizar Producto"/>
+                  <text value="Actualizar Producto"/>
                 </properties>
               </component>
               <component id="9683c" class="javax.swing.JLabel">

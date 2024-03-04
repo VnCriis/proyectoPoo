@@ -12,8 +12,17 @@ public class login {
     private JButton SALIRButton;
     private JPanel login1;
     private JPanel login2;
+    private JButton button2;
+    private JButton button3;
 
     public login() {
+        button3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Main.ventana.setContentPane(new inicio().inicioJPanel);
+                Main.ventana.revalidate();
+            }
+        });
     }
 
     public login(String tipoUsuario) {
@@ -75,13 +84,5 @@ public class login {
                 }
             }
         });
-        SALIRButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(null, "¡Muchas gracias por su visita!", "Gracias por Preferirnos", JOptionPane.INFORMATION_MESSAGE);
-                System.exit(0);
-            }
-        });
-
     }
 }

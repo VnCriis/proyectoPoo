@@ -7,5 +7,5 @@ public class Main {
         ventana.pack();
         ventana.setSize(1900, 870);
         ventana.setVisible(true);
-}
+    }
 }

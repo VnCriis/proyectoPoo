@@ -32,5 +32,19 @@ public class admin {
                 Main.ventana.revalidate();
             }
         });
+        cajeroButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Main.ventana.setContentPane(new ProductosAdmin().productosJPanel);
+                Main.ventana.revalidate();
+            }
+        });
+        bodegaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Main.ventana.setContentPane(new FacturasAD().facturasADm);
+                Main.ventana.revalidate();
+            }
+        });
     }
 }

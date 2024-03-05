@@ -1,3 +1,8 @@
+import java.awt.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -12,10 +17,13 @@ public class login {
     private JButton SALIRButton;
     private JPanel login1;
     private JPanel login2;
-    private JButton button2;
+    private JButton ayudaButton;
     private JButton button3;
 
     public login() {
+    }
+
+    public login(String tipoUsuario) {
         button3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -23,9 +31,32 @@ public class login {
                 Main.ventana.revalidate();
             }
         });
-    }
-
-    public login(String tipoUsuario) {
+        ayudaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                InputStream inputStream = Main.class.getClassLoader().getResourceAsStream("manualLogin.pdf");
+                if (inputStream != null) {
+                    try {
+                        File tempFile = File.createTempFile("tempPDF", ".pdf");
+                        FileOutputStream outputStream = new FileOutputStream(tempFile);
+                        byte[] buffer = new byte[1024];
+                        int length;
+                        while ((length = inputStream.read(buffer)) != -1) {
+                            outputStream.write(buffer, 0, length);
+                        }
+                        inputStream.close();
+                        outputStream.close();
+                        // Abrir el archivo temporal
+                        Desktop.getDesktop().open(tempFile);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                        JOptionPane.showMessageDialog(null, "Error al abrir el archivo PDF.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "El archivo PDF no se encuentra en el directorio de recursos.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

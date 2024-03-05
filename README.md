@@ -1,5 +1,5 @@
 MiniMarketPro
-Responsables: Francis Aconda(diseño del inventario de productos), Anthony Haro(diseño de )
+Responsables: Francis Aconda(diseño del inventario de productos), Anthony Haro(diseño de cajero ), Cristian Usiña (Diseño de interfaz) Carlos Ushiña(diseño de login y admin)
 El sistema de simulación de un minimarket, consta de funciones básicas dentor de este tales como el 
 control de usuarios, el control de empleados, el control de inventario y el control de ventas,
 a continuación se detalla los procesos realizados al momento de realizar este sistema.

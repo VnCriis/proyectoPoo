@@ -1,4 +1,9 @@
 Link del manual de usuario del sistema: https://youtu.be/Ecaj_LZKXFs 
+Estructura del proyecto
+![image](https://github.com/VnCriis/proyectoPoo/assets/150816550/9405d051-5bdd-4b87-a49c-1b756530455e)
+Complementos
+![image](https://github.com/VnCriis/proyectoPoo/assets/150816550/9664d5a5-49a0-493e-be22-defb5ea79f3d)
+
 MiniMarketPro
 Aqui se muestran los procesos realizados para la creacion del mismo proyecto
 ![4](https://github.com/VnCriis/proyectoPoo/assets/150806786/b3f3be21-cdde-42b2-9fe7-4787524083a2)

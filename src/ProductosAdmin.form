@@ -27,6 +27,8 @@
               <grid row="0" column="0" row-span="1" col-span="7" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <font name="Elephant" size="20"/>
+              <foreground color="-16777216"/>
               <text value="Opciones de Modificar Productos"/>
             </properties>
           </component>
@@ -35,6 +37,8 @@
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <font name="Elephant" size="20"/>
+              <foreground color="-16777216"/>
               <text value="ID-Producto"/>
             </properties>
           </component>
@@ -51,6 +55,8 @@
               <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <font name="Elephant" size="20"/>
+              <foreground color="-16777216"/>
               <text value="Tipo"/>
             </properties>
           </component>
@@ -67,6 +73,8 @@
               <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <font name="Elephant" size="20"/>
+              <foreground color="-16777216"/>
               <text value="Nombre"/>
             </properties>
           </component>
@@ -83,6 +91,8 @@
               <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <font name="Elephant" size="20"/>
+              <foreground color="-16777216"/>
               <text value="Marca"/>
             </properties>
           </component>
@@ -99,6 +109,8 @@
               <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <font name="Elephant" size="20"/>
+              <foreground color="-16777216"/>
               <text value="Cantidad"/>
             </properties>
           </component>
@@ -115,6 +127,8 @@
               <grid row="2" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <font name="Elephant" size="20"/>
+              <foreground color="-16777216"/>
               <text value="Precio"/>
             </properties>
           </component>
@@ -131,7 +145,9 @@
               <grid row="3" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Buscar"/>
+              <background color="-9531996"/>
+              <icon value="imgBuscar.png"/>
+              <text value=""/>
             </properties>
           </component>
           <hspacer id="f0d06">
@@ -139,6 +155,16 @@
               <grid row="3" column="6" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
           </hspacer>
+          <component id="66dc9" class="javax.swing.JLabel">
+            <constraints>
+              <grid row="3" column="3" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font name="Elephant" size="20"/>
+              <foreground color="-16777216"/>
+              <text value="Búsqueda personalizada? Presione aquí"/>
+            </properties>
+          </component>
         </children>
       </grid>
       <grid id="15233" layout-manager="GridLayoutManager" row-count="1" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -285,14 +311,32 @@
               </component>
             </children>
           </grid>
-          <grid id="cb9e1" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+          <grid id="cb9e1" layout-manager="GridLayoutManager" row-count="1" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
             <margin top="0" left="0" bottom="0" right="0"/>
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
             </constraints>
-            <properties/>
+            <properties>
+              <background color="-3416079"/>
+            </properties>
             <border type="none"/>
-            <children/>
+            <children>
+              <component id="888a5" class="javax.swing.JButton" binding="ayudaButton">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <background color="-3416079"/>
+                  <icon value="iconoAyuda.png"/>
+                  <text value=""/>
+                </properties>
+              </component>
+              <hspacer id="3d453">
+                <constraints>
+                  <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+                </constraints>
+              </hspacer>
+            </children>
           </grid>
           <vspacer id="f7cd7">
             <constraints>

@@ -307,8 +307,12 @@ public class producto {
         regresarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Main.ventana.setContentPane(new login().loginJPanel);
-                Main.ventana.revalidate();
+                int opcion = JOptionPane.showConfirmDialog(null, "¿Seguro que desea salir?", "Confirmación", JOptionPane.YES_NO_OPTION);
+                if (opcion == JOptionPane.YES_OPTION) {
+                    Main.ventana.setContentPane(new inicio().inicioJPanel);
+                    Main.ventana.revalidate();
+                } else {
+                }
             }
         });
         table1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {

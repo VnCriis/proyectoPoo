@@ -211,11 +211,34 @@ public class empleado {
             statement.setInt(7, telefono);
             statement.setString(8, observaciones);
             statement.executeUpdate();
+            if (cargo.equals("administrador")) {
+                // Inserción en la tabla correspondiente al Cargo1
+                String queryCargo1 = "INSERT INTO administradores(usuario, contraseña) VALUES (?, ?)";
+                PreparedStatement statementCargo1 = connection.prepareStatement(queryCargo1);
+                statementCargo1.setString(1, nombres);
+                statementCargo1.setInt(2, cedula);
+                statementCargo1.executeUpdate();
+            } else if (cargo.equals("cajero")) {
+                // Inserción en la tabla correspondiente al Cargo2
+                String queryCargo2 = "INSERT INTO cajeros (usuario, contraseña) VALUES (?, ?)";
+                PreparedStatement statementCargo2 = connection.prepareStatement(queryCargo2);
+                statementCargo2.setString(1, nombres);
+                statementCargo2.setInt(2, cedula);
+                statementCargo2.executeUpdate();
+            }else if (cargo.equals("bodeguero")) {
+                // Inserción en la tabla correspondiente al Cargo2
+                String queryCargo2 = "INSERT INTO bodegueros (usuario, contraseña) VALUES (?, ?)";
+                PreparedStatement statementCargo2 = connection.prepareStatement(queryCargo2);
+                statementCargo2.setString(1, nombres);
+                statementCargo2.setInt(2, cedula);
+                statementCargo2.executeUpdate();
+            }
             configureTable();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }
+
 
     private void editarEmpleado() {
         try {

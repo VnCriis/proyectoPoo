@@ -1,7 +1,12 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,6 +26,7 @@ public class ProductosAdmin {
     private JButton buscarButton;
     private JButton regresarButton;
     private JTable table1;
+    private JButton ayudaButton;
     private Connection connection;
 
     public ProductosAdmin() {
@@ -68,6 +74,32 @@ public class ProductosAdmin {
             }
         });
 
+        ayudaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                InputStream inputStream = Main.class.getClassLoader().getResourceAsStream("manualAdmin.pdf");
+                if (inputStream != null) {
+                    try {
+                        File tempFile = File.createTempFile("tempPDF", ".pdf");
+                        FileOutputStream outputStream = new FileOutputStream(tempFile);
+                        byte[] buffer = new byte[1024];
+                        int length;
+                        while ((length = inputStream.read(buffer)) != -1) {
+                            outputStream.write(buffer, 0, length);
+                        }
+                        inputStream.close();
+                        outputStream.close();
+                        // Abrir el archivo temporal
+                        Desktop.getDesktop().open(tempFile);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                        JOptionPane.showMessageDialog(null, "Error al abrir el archivo PDF.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "El archivo PDF no se encuentra en el directorio de recursos.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
     }
 
     private void configureTable() {

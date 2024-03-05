@@ -78,7 +78,7 @@
                 <properties>
                   <font name="Elephant" size="18"/>
                   <foreground color="-16777216"/>
-                  <text value="Nombres*"/>
+                  <text value="Nombre*"/>
                 </properties>
               </component>
               <component id="ebeb5" class="javax.swing.JTextField" binding="textField2">

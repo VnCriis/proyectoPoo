@@ -330,7 +330,29 @@ public class Cajero {
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
+                InputStream inputStream = Main.class.getClassLoader().getResourceAsStream("datos"+num+".pdf");
+                if (inputStream != null) {
+                    try {
+                        File tempFile = File.createTempFile("tempPDF", ".pdf");
+                        FileOutputStream outputStream = new FileOutputStream(tempFile);
+                        byte[] buffer = new byte[1024];
+                        int length;
+                        while ((length = inputStream.read(buffer)) != -1) {
+                            outputStream.write(buffer, 0, length);
+                        }
+                        inputStream.close();
+                        outputStream.close();
+                        // Abrir el archivo temporal
+                        Desktop.getDesktop().open(tempFile);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                        JOptionPane.showMessageDialog(null, "Error al abrir el archivo PDF.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "El archivo PDF no se encuentra en el directorio de recursos.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
+
         });
         codigotxt.addFocusListener(new FocusAdapter() {
             @Override

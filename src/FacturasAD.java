@@ -64,7 +64,7 @@ public class FacturasAD {
 
             // Crear un modelo de tabla para almacenar los datos
             DefaultTableModel model = new DefaultTableModel();
-            model.addColumn("cod_facturas");
+            model.addColumn("numero");
             model.addColumn("nombre_cliente");
             model.addColumn("cedula");
             model.addColumn("productos");
@@ -73,7 +73,7 @@ public class FacturasAD {
 
             // Llenar el modelo con los datos de la base de datos
             while (resultSet.next()) {
-                int cod_facturas = resultSet.getInt("cod_facturas");
+                int cod_facturas = resultSet.getInt("numero");
                 String nombre_cliente = resultSet.getString("nombre_cliente");
                 int cedula = resultSet.getInt("cedula");
                 String productos = resultSet.getString("productos");
@@ -106,7 +106,7 @@ public class FacturasAD {
 
 
             // Insertar datos en la base de datos
-            String insertQuery = "INSERT INTO facturasad(cod_facturas,nombre_cliente,cedula,productos,total,nombre_empleado) VALUES (?, ?, ?,?,?,?)";
+            String insertQuery = "INSERT INTO facturasad(numero,nombre_cliente,cedula,productos,total,nombre_empleado) VALUES (?, ?, ?,?,?,?)";
             PreparedStatement insertStatement = connection.prepareStatement(insertQuery);
             insertStatement.setInt(1,cod_facturas);
             insertStatement.setString(2, nombre_cliente);
@@ -156,14 +156,14 @@ public class FacturasAD {
                 // Consultar la existencia del ID en la base de datos
                 if (exisproducto(id)) {
                     // Obtener la información del producto por ID
-                    String query = "SELECT * FROM facturasad WHERE cod_facturas = ?";
+                    String query = "SELECT * FROM facturasad WHERE numero = ?";
                     try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
                         preparedStatement.setInt(1,id);
                         try (ResultSet resultSet = preparedStatement.executeQuery()) {
                             // Mostrar la información en los campos de texto
                             if (resultSet.next()) {
 
-                                int cod_facturas = resultSet.getInt("cod_facturas");
+                                int cod_facturas = resultSet.getInt("numero");
                                 String nombre_cliente = resultSet.getString("nombre_cliente");
                                 int cedula = resultSet.getInt("cedula");
                                 String productos = resultSet.getString("productos");
@@ -193,7 +193,7 @@ public class FacturasAD {
     }
 
     private boolean exisproducto(int id) throws SQLException {
-        String query = "SELECT COUNT(*) FROM facturasad WHERE cod_facturas=?";
+        String query = "SELECT COUNT(*) FROM facturasad WHERE numero=?";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();

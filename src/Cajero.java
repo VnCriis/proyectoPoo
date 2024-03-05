@@ -169,6 +169,7 @@ public class Cajero {
                         nombretxt.setText("");
                         preciotxt.setText("");
                         marcatxt.setText("");
+                        configureTable();
                     } catch (SQLException ex) {
                         System.out.println("Error al conectar a la base de datos: " + ex.getMessage());
                     }
@@ -320,6 +321,7 @@ public class Cajero {
                             createStatement.executeUpdate(createTableSQL);
                             createStatement.close();
                             conn.close();
+                            configureTable();
                         } catch (Exception ex) {
                             System.err.println("Error al manipular el PDF: " + ex.getMessage());
                         }

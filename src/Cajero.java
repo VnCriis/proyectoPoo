@@ -178,7 +178,11 @@ public class Cajero {
         crearButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                Main.ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                Main.ventana.setContentPane(new cliente().client);
+                Main.ventana.pack();
+                Main.ventana.setSize(1900, 870);
+                Main.ventana.setVisible(true);
             }
         });
         venderButton.addActionListener(new ActionListener() {

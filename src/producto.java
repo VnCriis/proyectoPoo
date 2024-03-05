@@ -348,7 +348,7 @@ public class producto {
         ayudaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                InputStream inputStream = Main.class.getClassLoader().getResourceAsStream("datos4.pdf");
+                InputStream inputStream = Main.class.getClassLoader().getResourceAsStream("manualAdmin.pdf");
                 if (inputStream != null) {
                     try {
                         File tempFile = File.createTempFile("tempPDF", ".pdf");

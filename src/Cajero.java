@@ -1,14 +1,16 @@
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
-import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.font.PDType0Font;
-import java.awt.Font;
+
+import java.awt.*;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.*;
+import java.io.InputStream;
 import java.sql.*;
 
 public class Cajero {
@@ -27,6 +29,8 @@ public class Cajero {
     private JButton agregarButton;
     private JButton venderButton;
     private JTable carro;
+    private JButton ayudaButton;
+    private JButton facturaButton;
     boolean encontrado = false;
     boolean encontrado_client = false;
     String nombre = null;
@@ -40,16 +44,14 @@ public class Cajero {
     String correo=null;
     String direccion=null;
     int telefono=0;
+    int num=0;
     public Cajero() {;
         configureTable();
         regresarButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Main.ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 Main.ventana.setContentPane(new inicio().inicioJPanel);
-                Main.ventana.pack();
-                Main.ventana.setSize(1900, 870);
-                Main.ventana.setVisible(true);
+                Main.ventana.revalidate();
             }
         });
         buscarButton.addActionListener(new ActionListener() {
@@ -102,7 +104,7 @@ public class Cajero {
                 ResultSet rs;
                 try {
                     conn = conector.obtenerConexion();
-                    String sql = "SELECT * FROM cliente";
+                    String sql = "SELECT * FROM clientes";
                     stmt = conn.prepareStatement(sql);
                     rs = stmt.executeQuery();
                     String codigoIngresado = idtxt.getText();
@@ -179,11 +181,8 @@ public class Cajero {
         crearButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Main.ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                Main.ventana.setContentPane(new cliente().client);
-                Main.ventana.pack();
-                Main.ventana.setSize(1900, 870);
-                Main.ventana.setVisible(true);
+                Main.ventana.setContentPane(new cliente().clienteJPanel);
+                Main.ventana.revalidate();
             }
         });
         venderButton.addActionListener(new ActionListener() {
@@ -225,7 +224,7 @@ public class Cajero {
                         conn = conector.obtenerConexion();
                         stmt = conn.prepareStatement(sql3);
                         rs = stmt.executeQuery();
-                        int num=0;
+
                         while (rs.next()) {
                             num = rs.getInt("numero");
                         }
@@ -303,7 +302,7 @@ public class Cajero {
                             y -= 20;
 
                             contentStream.close();
-                            document.save("datos"+num+".pdf");
+                            document.save("C:/Users/cusin/IdeaProjects/proyectoPoo/img/datos"+num+".pdf");
                             System.out.println("PDF creado correctamente.");
 
                             String dropTableSQL = "DROP TABLE IF EXISTS carrito";
@@ -363,6 +362,58 @@ public class Cajero {
                 }
             }
         });
+        ayudaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                InputStream inputStream = Main.class.getClassLoader().getResourceAsStream("manualAdmin.pdf");
+                if (inputStream != null) {
+                    try {
+                        File tempFile = File.createTempFile("tempPDF", ".pdf");
+                        FileOutputStream outputStream = new FileOutputStream(tempFile);
+                        byte[] buffer = new byte[1024];
+                        int length;
+                        while ((length = inputStream.read(buffer)) != -1) {
+                            outputStream.write(buffer, 0, length);
+                        }
+                        inputStream.close();
+                        outputStream.close();
+                        // Abrir el archivo temporal
+                        Desktop.getDesktop().open(tempFile);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                        JOptionPane.showMessageDialog(null, "Error al abrir el archivo PDF.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "El archivo PDF no se encuentra en el directorio de recursos.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
+        facturaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                InputStream inputStream = Main.class.getClassLoader().getResourceAsStream("datos"+num+".pdf");
+                if (inputStream != null) {
+                    try {
+                        File tempFile = File.createTempFile("tempPDF", ".pdf");
+                        FileOutputStream outputStream = new FileOutputStream(tempFile);
+                        byte[] buffer = new byte[1024];
+                        int length;
+                        while ((length = inputStream.read(buffer)) != -1) {
+                            outputStream.write(buffer, 0, length);
+                        }
+                        inputStream.close();
+                        outputStream.close();
+                        // Abrir el archivo temporal
+                        Desktop.getDesktop().open(tempFile);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                        JOptionPane.showMessageDialog(null, "Error al abrir el archivo PDF.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "El archivo PDF no se encuentra en el directorio de recursos.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        });
     }
     private void configureTable() {
         Connection conn;
@@ -376,7 +427,7 @@ public class Cajero {
             DefaultTableModel modelo = new DefaultTableModel();
             modelo.addColumn("Producto");
             modelo.addColumn("Cantidad");
-            modelo.addColumn("Precio");
+            modelo.addColumn("Precio Unitario");
             modelo.addColumn("Sub_total");
             while (rs.next()) {
                 String producto = rs.getString("nombre_produc");
